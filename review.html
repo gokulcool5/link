@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+    *{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+#back{
+    padding: 10px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border:1px solid black;
+}
+#back:hover{
+    background: black;
+    color:#fff;
+    box-shadow: 0px 0px 5px 2px black;
+    border:1px solid white;
+    transform: scale(1.07,1.07);
+}
+body{
+	background: linear-gradient(to bottom,green,#7fc469,green);
+	height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	color: #565e6b;
+}
+
+.wrapper{
+	width: 500px;
+	height: 100%;
+	background: #fff;
+	margin: 15px auto 0;
+}
+
+.wrapper .title{
+	padding: 30px 20px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 700;
+	border-bottom: 1px solid #ebedec;
+}
+
+.wrapper .tabs_wrap{
+	padding: 20px;
+	border-bottom: 1px solid #ebedec;
+}
+
+.wrapper .tabs_wrap ul{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+
+.wrapper .tabs_wrap ul li{
+	width: 135px;
+    text-align: center;
+    background: #e9ecf1;
+	border-right: 1px solid #bbc3cf;
+    padding: 13px 15px;
+	cursor: pointer;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+
+.wrapper .tabs_wrap ul li:first-child{
+	border-top-left-radius: 25px;
+	
+}
+
+.wrapper .tabs_wrap ul li:last-child{
+	border-right: 0px;
+	border-top-right-radius: 25px;
+	
+}
+
+.wrapper .tabs_wrap ul li:hover,
+.wrapper .tabs_wrap ul li.active{
+	background: #7fc469;
+	color: #fff;
+	transform: scale(1.1,1.1);
+	box-shadow:0px 0px 5px black  ;
+}
+
+.wrapper .container .item_wrap{
+	padding: 10px 20px;
+	border-bottom: 1px solid #ebedec;
+	cursor: pointer;
+}
+
+.wrapper .container .item_wrap:hover{
+	background: #e9ecf1;
+}
+
+.wrapper .container .item{
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+}
+
+.item_wrap .item .item_left{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+.item_wrap .item_left img{
+	width: 70px;
+	height: 70px;
+	display: block;
+}
+
+.item_wrap .item_left .data{
+	margin-left: 20px;
+}
+
+.item_wrap .item_left .data .name{
+	font-weight: 600;
+}
+.name{
+    font-weight:bolder;
+}
+
+.item_wrap .item_left .data .distance{
+	color: #7f8b9b;
+	font-size: 14px;
+	margin-top: 3px;
+}
+
+i{
+	color:goldenrod;
+	text-shadow: 0px 0px 3px gold ;
+	margin-left: 5px;
+}
+#unorderlist{
+transform:rotate(180deg);
+}
+.online{
+transform:rotate(-180deg);
+}
+
+@media (min-width:230px) and (max-width:500px){
+	#starrating{
+		width: 230px;
+		font-size: 10px;
+	}
+	.wrapper .tabs_wrap ul li{
+		width: 35px;
+		text-align: center;
+		background: #e9ecf1;
+		border-right: 1px solid #bbc3cf;
+		padding: 13px 15px;
+		cursor: pointer;
+		-webkit-transition: all 0.2s ease;
+		-o-transition: all 0.2s ease;
+		transition: all 0.2s ease;
+	}
+	.wrapper .tabs_wrap ul li:hover,
+	.wrapper .tabs_wrap ul li.active{
+		background: #7fc469;
+		color: #fff;
+		transform: scale(1.01,1.01);
+		box-shadow:0px 0px 5px black  ;
+	}
+	.container{
+		font-size: 10px;
+	}
+	.item_wrap .item_left .data{
+		margin-left: 0px;
+		margin-right: 10px;
+		
+	}
+	.item_wrap .item_left .data .distance{		
+		font-size: 10px;
+		
+	}
+}
+
+    </style>
+
+  </head>
+  <body>
+    
+    <a href="index.html"><button type="button" id="back" >Back To Home <br></button></a>
+    
+    
+    <div class="wrapper" id="starrating">
+        <div class="title">
+          Reviews
+        </div>
+        <div class="tabs_wrap">
+          <ul>
+            <li id="all" class="active">Rating stars<br><i class="material-icons">star</i></li>
+          </ul>
+        </div>
+        <div class="container">
+        
+          <ul id="unorderlist">
+          
+          
+          
+          </ul>
+          
+        </div>
+      </div>
+
+<script>
+
+
+
+document.addEventListener("DOMContentLoaded",function(){
+  
+google.script.run.withSuccessHandler(generateTable).getTableData();
+
+  
+});
+
+function generateTable(dataArray){
+    
+    dataArray.forEach(function(r){
+    var unorder = document.getElementById("unorderlist");
+    var list = document.createElement("li");
+
+       
+    var full = document.createElement("div");
+    full.className = "item";
+    var first = document.createElement("div");
+    first.className = "item-left";
+    
+    var firstdata = document.createElement("div");
+    firstdata.className = "data";
+    var seconddata = document.createElement("div");
+    seconddata.className = "item_right";
+        
+    var f1 = document.createElement("p");
+    f1.className = 'name';
+    f1.textContent = r[0];
+    
+    var f2 = document.createElement("p");
+    f2.className = 'distance';
+    f2.textContent = r[1];
+    
+    var f3 = document.createElement("p");
+    f3.className = 'status';
+    f3.textContent = r[2] ;
+    
+    var f4 = document.createElement("p");
+    f4.className = 'status';
+    var rates = r[3];
+    f4.textContent = rates ;
+    
+    firstdata.appendChild(f1);
+    firstdata.appendChild(f2);
+
+    seconddata.appendChild(f3);
+    seconddata.appendChild(f4);
+    
+    first.appendChild(firstdata);
+    full.appendChild(first);
+    full.appendChild(seconddata);
+    
+    list.appendChild(full);
+    unorder.appendChild(list);
+    
+    var text ="item_wrap rate" +rates+" online";
+    list.className = text;
+    
+    
+    });  
+  }
+
+
+</script>
+  </body>
+</html>
+
+
